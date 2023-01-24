@@ -6,16 +6,16 @@ using namespace std;
 
 
 
-void permute(vector<vector<float>>* floatPrm, vector<float> a, int l, int r){
+void permute(vector<vector<float>>* floatPrm, vector<float> flt, int l, int r){
 	if (l == r){									//l adalah elemen yang ditahan / posisi tidak diubah. dimulai dari 0
-        if (!findVec(*floatPrm, a)){				//r adalah panjang elemen-1. jika l==r, tidak ada elemen lain yang perlu
-			floatPrm->push_back(a);					//diacak. langsung di push ke floatPrm
+        if (!findVec(*floatPrm, flt)){				//r adalah panjang elemen-1. jika l==r, tidak ada elemen lain yang perlu
+			floatPrm->push_back(flt);					//diacak. langsung di push ke floatPrm
 		}
     }else {
 		for (int i = l; i <= r; i++) {				//masing-masing elemen ditahan, elemen lain dipermutasikan
-			swap(a[l], a[i]);
-			permute(floatPrm, a, l + 1, r);
-			swap(a[l], a[i]);
+			swap(flt[l], flt[i]);
+			permute(floatPrm, flt, l + 1, r);
+			swap(flt[l], flt[i]);
 		}
 	}
 }
