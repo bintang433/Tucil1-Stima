@@ -1,52 +1,20 @@
-#ifndef PERMUTE_H
-#define PERMUTE_H
+#ifndef PERMUTATION_H
+#define PERMUTATION_H
 
-#include <bits/stdc++.h>
-#include <iostream>
+#include "utility.h"
 using namespace std;
 
-void displayVector(vector<float> vec){
-	for (int i = 0; i < vec.size(); i++){
-		cout << vec[i] << ' ';
-	}
-	cout << "\n";
-}
 
-void displayStrVector(vector<string> vec){
-	for (int i = 0; i < vec.size(); i++){
-		cout << vec[i];
-	}
-	cout << "\n";
-}
 
-bool findVec(vector<vector<float>> prm, vector<float> src){
-	bool found = false;
-	auto idx = find(prm.begin(), prm.end(), src);
-	if (idx!=prm.end()){
-		found = true;
-	}
-	return found;
-}
-
-void permute(vector<vector<float>>* prm, vector<float> a, int l, int r)
-{
-	// Base case
-	if (l == r){
-        if (!findVec(*prm, a)){
-			prm->push_back(a);
+void permute(vector<vector<float>>* floatPrm, vector<float> a, int l, int r){
+	if (l == r){									//l adalah elemen yang ditahan / posisi tidak diubah. dimulai dari 0
+        if (!findVec(*floatPrm, a)){				//r adalah panjang elemen-1. jika l==r, tidak ada elemen lain yang perlu
+			floatPrm->push_back(a);					//diacak. langsung di push ke floatPrm
 		}
-    }
-	else {
-		// Permutations made
-		for (int i = l; i <= r; i++) {
-
-			// Swapping done
+    }else {
+		for (int i = l; i <= r; i++) {				//masing-masing elemen ditahan, elemen lain dipermutasikan
 			swap(a[l], a[i]);
-
-			// Recursion called
-			permute(prm, a, l + 1, r);
-
-			// backtrack
+			permute(floatPrm, a, l + 1, r);
 			swap(a[l], a[i]);
 		}
 	}
@@ -55,12 +23,13 @@ void permute(vector<vector<float>>* prm, vector<float> a, int l, int r)
 void repetitionPermutation(vector<vector<string>>* repPrm, string prefix, int n){
 	string prm;
 	vector<string> prmVec (4, "");
+	
 	string op[4] = {"+", "-", "*", "/"};
 	int len = 4;
 
-	if (n == 1){
-		for (int i = 0; i < len; i++){
-			prm = prefix + op[i];
+	if (n == 1){													//prefix adalah elemen yang ditahan
+		for (int i = 0; i < len; i++){								//n adalah banyak elemen yang perlu dipermutasikan
+			prm = prefix + op[i];									//jika n==1, elemen tersebut adalah masing masing elemen operator
 			for (int j = 0; j < prm.length(); j++){
 				string temp(1, prm[j]);
 				prmVec[j] = temp;
@@ -69,10 +38,9 @@ void repetitionPermutation(vector<vector<string>>* repPrm, string prefix, int n)
 		}
 	}else{
 		for (int i = 0; i < len; i++){
-			repetitionPermutation(repPrm, prefix + op[i], n - 1);
-		}
+			repetitionPermutation(repPrm, prefix + op[i], n - 1);	//setiap elemen ditambahkan menjadi prefix baru,
+		}															//elemen yang dipermutasikan berkurang.
 	}
-
 }
 
 #endif
