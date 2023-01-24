@@ -11,7 +11,7 @@ using namespace std::chrono;
 
 int main(){
 	vector<vector<string>> result;
-    vector<float> intInput;
+    vector<float> floatInput;
     vector<string> strVec;
     vector<vector<float>> floatPrm;
     vector<vector<string>> opPrm;
@@ -24,7 +24,7 @@ int main(){
     int cont = 1;                                       //dilakukan sekali
 
     while (cont==1){
-        intInput.clear();                               //Hapus isi vektor setiap mencari solusi
+        floatInput.clear();                               //Hapus isi vektor setiap mencari solusi
         result.clear();
         strVec.clear();
         floatPrm.clear();
@@ -51,11 +51,11 @@ int main(){
             cout << strInput << endl;           
         }
 
-        bool valid = validator(strInput, &intInput);            //Validasi input, harus 4 "kartu" dengan format yang benar
+        bool valid = validator(strInput, &floatInput);            //Validasi input, harus 4 "kartu" dengan format yang benar
         if (valid){
             auto begin = high_resolution_clock::now();          //Ambil waktu mulai algoritma untuk menghitung execution time
 
-            permute(&floatPrm, intInput, 0, intInput.size()-1); //Permutasi urutan kartu, disimpan dalam vector yang berisi vector of float
+            permute(&floatPrm, floatInput, 0, floatInput.size()-1); //Permutasi urutan kartu, disimpan dalam vector yang berisi vector of float
             result24(opPrm, floatPrm, &result);                 //Hitung hasil permutasi dengan semua kemungkinan operasi.
                                                                 //Jika hasi operasi == 24, masuk ke vector result
             auto end = high_resolution_clock::now();            //Selesai menghitung waktu algoritma. hasil dalam satuan detik

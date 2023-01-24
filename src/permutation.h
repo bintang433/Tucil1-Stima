@@ -9,7 +9,7 @@ using namespace std;
 void permute(vector<vector<float>>* floatPrm, vector<float> flt, int l, int r){
 	if (l == r){									//l adalah elemen yang ditahan / posisi tidak diubah. dimulai dari 0
         if (!findVec(*floatPrm, flt)){				//r adalah panjang elemen-1. jika l==r, tidak ada elemen lain yang perlu
-			floatPrm->push_back(flt);					//diacak. langsung di push ke floatPrm
+			floatPrm->push_back(flt);				//diacak. langsung di push ke floatPrm
 		}
     }else {
 		for (int i = l; i <= r; i++) {				//masing-masing elemen ditahan, elemen lain dipermutasikan
